@@ -1,10 +1,15 @@
-import { FC } from "react";
+import React, { FC } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar: FC = () => {
     return (
-        <div className="text-3xl font-bold underline">
-            <h1>Navbar</h1>
-        </div>
+        <nav className="bg-gray-200 p-3 font-medium flex justify-between">
+            <Link to={"/"}>Ecommerce Dashboard.</Link>
+            <div className="flex space-x-2">
+                <Link to={"/auth/signin"}>Signin</Link>
+                <Link to={"/auth/signup"}>Signup</Link>
+            </div>
+        </nav>
     );
 };
 
