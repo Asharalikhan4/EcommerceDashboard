@@ -17,7 +17,7 @@ const Navbar: FC = () => {
     console.log("deviceType", deviceType);
 
     return (
-        <nav className="bg-gray-200 p-3 font-medium flex justify-between items-center">
+        <nav className="bg-[#6366f1] p-3 font-medium flex justify-between items-center text-white">
             <Link to={"/"}>Ecommerce Dashboard.</Link>
             <div>
                 <Input
@@ -25,7 +25,7 @@ const Navbar: FC = () => {
                     placeholder="Search"
                     value={searchText}
                     onChange={handleSearch}
-                    className="px-2.5 py-1 w-96 rounded-md outline-none"
+                    className="px-2.5 py-1 w-96 rounded-md outline-none text-black"
                 />
             </div>
             <div className="flex space-x-2">
