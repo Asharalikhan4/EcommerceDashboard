@@ -1,9 +1,19 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+
+import { setUser } from "../../redux/UserSlice/UserSlice";
 import { SignupPageUserStateTypes } from "./SignupTypes";
+import { BASE_URL } from "../../config/constants";
 
 const SignupPage: FC = () => {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState<boolean>(false);
     const [userDetails, setUserDetails] = useState<SignupPageUserStateTypes>({
         name: "",
         email: "",
@@ -17,6 +27,13 @@ const SignupPage: FC = () => {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
+            setLoading(true);
+            const response = await axios.post(`${BASE_URL}/user/signup`, userDetails);
+            if(response?.status === 200){
+                toast.success(response?.data?.message || "Logged in successfully.");
+                return navigate("/");
+            };
+            toast.error(response?.data?.message || "Please try again.");
         } catch (error) {
         } finally {
             setUserDetails({ name: "", email: "", password: "" });

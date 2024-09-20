@@ -11,6 +11,8 @@ import SignupPage from "../pages/SignupPage/SignupPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CustomersPage from "../pages/CustomersPage/CustomersPage";
 import OrdersPage from "../pages/OrdersPage/OrdersPage";
+import OrderDetailsPage from "../pages/OrderDetailsPage/OrderDetailsPage";
+import CustomersDetailsPage from "../pages/CustomerDetailsPage/CustomerDetailsPage";
 
 const router = createBrowserRouter([
     {
@@ -27,9 +29,17 @@ const router = createBrowserRouter([
                 element: <CustomersPage />
             },
             {
+                path: "/customers/:customerId",
+                element: <CustomersDetailsPage />
+            },
+            {
                 path: "/orders",
-                element: <OrdersPage />
-            }
+                element: <OrdersPage />,
+            },
+            {
+                path: "/orders/:orderId",
+                element: <OrderDetailsPage />
+            },
         ],
     },
     {

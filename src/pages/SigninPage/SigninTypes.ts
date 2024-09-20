@@ -1,10 +1,9 @@
-export interface SignupPageUserStateTypes {
-    name: string;
+export interface SigninPageUserStateTypes {
     email: string;
     password: string;
 };
 
-export interface SingnupApiResponse {
+export interface SingninApiResponse {
     message: string;
     user: {
         id: string;

@@ -1,14 +1,24 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+
+import { setUser } from "../../redux/UserSlice/UserSlice";
+import { SigninPageUserStateTypes } from "./SigninTypes";
+import { BASE_URL } from "../../config/constants";
 
 const SigninPage: FC = () => {
 
-    const [userDetails, setUserDetails] = useState({
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState<boolean>(false);
+    const [userDetails, setUserDetails] = useState<SigninPageUserStateTypes>({
         email: "",
         password: "",
     });
-
-    const [errors, setErrors] = useState({
+    const [errors, setErrors] = useState<SigninPageUserStateTypes>({
         email: "",
         password: "",
     });
@@ -39,15 +49,25 @@ const SigninPage: FC = () => {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
+            setLoading(true);
+            const response = await axios.post(`${BASE_URL}/user/signin`, userDetails);
+            if(response?.status === 200){
+                console.log(response);
+                dispatch(setUser(response?.data?.user));
+                toast.success(response?.data?.message || "Logged in successfully.");
+                return navigate("/");
+            };
+            toast.error(response?.data?.message || "Please try again.");
         } catch (error) {
+            toast.error("Please try again.");
         } finally {
-            setUserDetails({email: "", password: "" });
+            setLoading(false);
+            setUserDetails({ email: "", password: "" });
             setErrors({ email: "", password: "" });
         }
     };
 
     const isFormValid = !errors.email && !errors.password;
-
 
     return (
         <div className="flex justify-center px-4 md:py-4 sm:px-6 lg:px-8">
@@ -76,8 +96,8 @@ const SigninPage: FC = () => {
                             />
                         </div>
                         {errors.email && (
-                                <p className="mt-1 text-xs md:text-sm text-red-500">{errors.email}</p>
-                            )}
+                            <p className="mt-1 text-xs md:text-sm text-red-500">{errors.email}</p>
+                        )}
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-sm md:text-base font-medium">
@@ -97,18 +117,17 @@ const SigninPage: FC = () => {
                             />
                         </div>
                         {errors.password && (
-                                <p className="mt-1 text-xs md:text-sm text-red-500">{errors.password}</p>
-                            )}
+                            <p className="mt-1 text-xs md:text-sm text-red-500">{errors.password}</p>
+                        )}
                     </div>
                     <div>
                         <button
                             type="submit"
                             disabled={!isFormValid}
-                            className={`flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-[#f8f8f8] shadow-sm hover:bg-[#4f46e5] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 dark:bg-[#4f46e5] dark:hover:bg-[#3730a3] dark:focus:ring-[#4f46e5] ${
-                                isFormValid
+                            className={`flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-[#f8f8f8] shadow-sm hover:bg-[#4f46e5] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 dark:bg-[#4f46e5] dark:hover:bg-[#3730a3] dark:focus:ring-[#4f46e5] ${isFormValid
                                     ? "bg-[#6366f1] dark:bg-[#4f46e5]"
                                     : "bg-[#9ca3af] dark:bg-[#6b7280] cursor-not-allowed"
-                            }`}
+                                }`}
                         >
                             Sign in
                         </button>

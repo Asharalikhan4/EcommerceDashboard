@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function useDeviceType() {
     const [deviceType, setDeviceType] = useState<"mobile" | "tablet" | "laptop">("laptop");
