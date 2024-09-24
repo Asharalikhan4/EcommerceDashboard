@@ -54,6 +54,7 @@ const SigninPage: FC = () => {
             if(response?.status === 200){
                 console.log(response);
                 dispatch(setUser(response?.data?.user));
+                localStorage.setItem("token", response?.data?.token);
                 toast.success(response?.data?.message || "Logged in successfully.");
                 return navigate("/");
             };

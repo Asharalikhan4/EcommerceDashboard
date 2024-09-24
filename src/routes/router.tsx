@@ -13,6 +13,9 @@ import CustomersPage from "../pages/CustomersPage/CustomersPage";
 import OrdersPage from "../pages/OrdersPage/OrdersPage";
 import OrderDetailsPage from "../pages/OrderDetailsPage/OrderDetailsPage";
 import CustomersDetailsPage from "../pages/CustomerDetailsPage/CustomerDetailsPage";
+import ProductsPage from "../pages/ProductsPage/ProductsPage";
+import WebsiteData from "../pages/WebsiteData/WebsiteData";
+import AppData from "../pages/AppData/AppData";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +43,18 @@ const router = createBrowserRouter([
                 path: "/orders/:orderId",
                 element: <OrderDetailsPage />
             },
+            {
+                path: "/products",
+                element: <ProductsPage />
+            },
+            {
+                path: "/website",
+                element: <WebsiteData />
+            },
+            {
+                path: "/app",
+                element: <AppData />
+            }
         ],
     },
     {
