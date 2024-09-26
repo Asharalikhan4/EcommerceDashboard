@@ -68,7 +68,7 @@ const ProductsPage: FC = () => {
                     <Button name="Refresh" onClick={fetchProducts} className="bg-blue-500 text-white p-2 rounded-lg" />
                 </div>
             </div>
-            <Input type="text" placeholder="Search Products" value={productSearch} onChange={handleProductSearch} className="border w-full p-2 rounded-lg" />
+            <Input type="text" placeholder="Search Product" value={productSearch} onChange={handleProductSearch} className="border w-full p-2 rounded-lg" />
             <div className="mt-4">
                 <div className="flex justify-between items-center border-b p-2 font-bold">
                     <div>Product Id</div>
