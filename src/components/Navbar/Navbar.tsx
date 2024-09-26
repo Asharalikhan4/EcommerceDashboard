@@ -7,7 +7,6 @@ import Input from "../Input/Input";
 const Navbar: FC = () => {
 
     const userName = useSelector((state: any) => state.user.name);
-    console.log("userName", userName);
 
     const [searchText, setSearchText] = useState<string>("");
 

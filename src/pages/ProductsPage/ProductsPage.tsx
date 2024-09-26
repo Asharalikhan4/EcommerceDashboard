@@ -28,8 +28,10 @@ const ProductsPage: FC = () => {
         setLoading(true);
         try {
             const response = await axios.get(`${BASE_URL}/product/all-products`);
+            console.log("response", response);
             if (response.status === 200) {
                 toast.success("Products fetched successfully");
+                setProducts(response?.data?.products);
             };
         } catch (error) {
             console.log(error);
@@ -60,22 +62,20 @@ const ProductsPage: FC = () => {
             <Input type="text" placeholder="Search Products" value={productSearch} onChange={handleProductSearch} className="border w-full p-2 rounded-lg" />
             <div className="mt-4">
                 <div className="flex justify-between items-center border-b p-2 font-bold">
-                    <div>Order Id</div>
-                    <div>Order Date</div>
-                    <div>Customer Name</div>
-                    <div>Total Amount</div>
-                    <div>Order Status</div>
+                    <div>Product Id</div>
+                    <div>Product Name</div>
+                    <div>Product Actual Price</div>
+                    <div>Product Sale Price</div>
                 </div>
             </div>
             <div>
                 {
-                    products?.map((order, index) => (
-                        <Link to={`${order?.orderId}`} key={index} className="flex justify-between items-center border-b p-2">
-                            <div>{order?.orderId}</div>
-                            <div>{order?.orderDate}</div>
-                            <div>{order?.customerName}</div>
-                            <div>{order?.totalAmount}</div>
-                            <div>{order?.orderStatus}</div>
+                    products?.map((product, index) => (
+                        <Link to={`${product?.productId}`} key={index} className="flex justify-between items-center border-b p-2">
+                            <div>{product?.productId}</div>
+                            <div>{product?.productName}</div>
+                            <div>{product?.productActualPrice}</div>
+                            <div>{product?.productSalePrice}</div>
                         </Link>
                     ))
                 }
