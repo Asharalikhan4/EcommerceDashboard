@@ -16,6 +16,7 @@ import CustomersDetailsPage from "../pages/CustomerDetailsPage/CustomerDetailsPa
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import WebsiteData from "../pages/WebsiteData/WebsiteData";
 import AppData from "../pages/AppData/AppData";
+import AddProductPage from "../pages/AddProductPage/AddProductPage";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: "/app",
                 element: <AppData />
+            },
+            {
+                path: "/add-product",
+                element: <AddProductPage />
             }
         ],
     },
