@@ -28,8 +28,6 @@ const ProductDetailsPage: FC = () => {
         fetchProduct();
     }, []);
 
-    console.log("productDetails", productDetails);
-
     return (
         <div>
             <h1>Product Details Page</h1>
